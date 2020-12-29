@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 
 use App\Profile;
 
+//編集履歴の実装の追記内容
+use App\ProfileHistory;
+
+use Carbon\Carbon;
+
 class ProfileController extends Controller
 {
     //以下を追記
@@ -63,7 +68,14 @@ class ProfileController extends Controller
         unset($profile_form['_token']);
         //該当するデータを上書きして保存する
         $profile->fill($profile_form)->save();
-        return redirect('admin/profile');
+        
+        //編集履歴の実装の追記内容
+        $profilehistory = new ProfileHistory;
+        $profilehistory->profile_id = $profile->id;
+        $profilehistory->edited_at = Carbon::now();
+        $profilehistory->save();
+        
+        return redirect('admin/profile/create');
     }
     
     public function delete(Request $request)
@@ -72,6 +84,6 @@ class ProfileController extends Controller
         $profile = Profile::find($request->id);
         //削除する
         $profile->delete();
-        return redirect('admin/profile');
+        return redirect('admin/profile/');
     }
 }
