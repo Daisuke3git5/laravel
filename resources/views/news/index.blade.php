@@ -42,6 +42,7 @@
                                 <div class="body mt-3">
                                     {{ str_limit($post->body, 1500) }}
                                 </div>
+                                <p>デプロイできてる？</p>
                             </div>
                             <div class="image col-md-6 text-right mt-4">
                                 @if ($post->image_path)

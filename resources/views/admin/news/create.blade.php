@@ -1,5 +1,5 @@
 
-    
+    //デプロイ出来ているかの確認
     {{-- layouts/admin.blade.phpを読み込む --}}
     @extends('layouts.admin')
     
